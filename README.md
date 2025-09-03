@@ -17,6 +17,9 @@ This package provides BSV (Bitcoin SV) expert Claude agents for Claude Code. It 
 Install or update BSV Claude agents:
 
 ```bash
+// If not installed in project
+npx @bsv/bsv-claude-agents
+// If installed in project
 npx bsv-claude-agents
 ```
 
@@ -65,6 +68,9 @@ If you encounter permission issues on Windows, you can:
 To update your BSV agents to the latest version, simply run the installation command again:
 
 ```bash
+// If not installed in project
+npx @bsv/bsv-claude-agents
+// If installed in project
 npx bsv-claude-agents
 ```
 
