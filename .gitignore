@@ -143,3 +143,6 @@ vite.config.ts.timestamp-*
 .vscode
 .claude
 CLAUDE.md
+
+# Lock files
+package-lock.json
