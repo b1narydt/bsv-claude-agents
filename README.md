@@ -1,2 +1,3 @@
 # claude-agents
-Node package to install BSV Claude Agents
+`npx bsv-claude-agents` to install/update BSV Claude Agents for Claude Code
+`node bin/cli.js --local` to install/update BSV Claude Agents for local development
