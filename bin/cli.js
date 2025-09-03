@@ -47,7 +47,7 @@ async function cloneOrUpdateRepo() {
   }
 }
 
-async function createSymlinks() {
+async function createLinks() {
   const agentsSourceDir = path.join(REPO_DIR, 'agents');
   
   if (!fs.existsSync(agentsSourceDir)) {
@@ -61,19 +61,52 @@ async function createSymlinks() {
     file.endsWith('.md') && file.includes('bsv')
   );
 
+  // Detect platform for cross-platform compatibility
+  const isWindows = os.platform() === 'win32';
+  const linkType = isWindows ? 'hard link' : 'symbolic link';
+
+  console.log(`Creating ${linkType}s for ${agentFiles.length} BSV agent(s)...`);
+
   for (const file of agentFiles) {
     const sourcePath = path.join(agentsSourceDir, file);
     const targetPath = path.join(AGENTS_DIR, file);
 
-    // Remove existing file or symlink
+    // Remove existing file or link
     if (fs.existsSync(targetPath)) {
       fs.unlinkSync(targetPath);
       console.log(`Removed existing: ${targetPath}`);
     }
 
-    // Create symlink
-    fs.symlinkSync(sourcePath, targetPath);
-    console.log(`Created symlink: ${targetPath} -> ${sourcePath}`);
+    try {
+      // Create platform-appropriate link
+      if (isWindows) {
+        // Use hard links on Windows (no admin privileges required)
+        fs.linkSync(sourcePath, targetPath);
+      } else {
+        // Use symbolic links on Unix/Linux/macOS
+        fs.symlinkSync(sourcePath, targetPath);
+      }
+      console.log(`Created ${linkType}: ${targetPath} -> ${sourcePath}`);
+    } catch (error) {
+      console.error(`Failed to create ${linkType} for ${file}:`, error.message);
+      
+      // Windows-specific error guidance
+      if (isWindows && error.code === 'EPERM') {
+        console.error('Note: On some Windows configurations, you may need to:');
+        console.error('  - Run as administrator, or');
+        console.error('  - Enable Developer Mode in Windows Settings');
+      }
+      
+      // Fallback: copy file instead of linking
+      console.log(`Falling back to file copy for ${file}...`);
+      try {
+        fs.copyFileSync(sourcePath, targetPath);
+        console.log(`Copied file: ${targetPath}`);
+        console.log('Warning: File copied instead of linked - updates will not sync automatically');
+      } catch (copyError) {
+        console.error(`Failed to copy file ${file}:`, copyError.message);
+      }
+    }
   }
 }
 
@@ -83,7 +116,7 @@ async function main() {
     
     await ensureDirectoryExists(CLAUDE_DIR);
     await cloneOrUpdateRepo();
-    await createSymlinks();
+    await createLinks();
     
     console.log('✅ BSV Claude Agents setup completed successfully!');
     console.log(`Agents are now available in: ${AGENTS_DIR}`);
