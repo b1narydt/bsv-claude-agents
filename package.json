@@ -1,0 +1,32 @@
+{
+  "name": "bsv-claude-agents",
+  "version": "1.0.0",
+  "description": "Install and manage BSV Claude Agents",
+  "main": "index.js",
+  "bin": {
+    "bsv-claude-agents": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude",
+    "agents",
+    "bsv",
+    "bitcoin",
+    "blockchain"
+  ],
+  "author": "Jake Jones",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "simple-git": "^3.19.1"
+  },
+  "files": [
+    "bin/",
+    "agents/",
+    "README.md"
+  ]
+}
