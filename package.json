@@ -1,10 +1,10 @@
 {
   "name": "@bsv/bsv-claude-agents",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Install and manage BSV Claude Agents for Claude Code",
   "main": "bin/cli.js",
   "bin": {
-    "bsv-claude-agents": "./bin/cli.js"
+    "@bsv/bsv-claude-agents": "./bin/cli.js"
   },
   "files": [
     "bin/",
