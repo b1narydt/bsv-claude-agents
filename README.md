@@ -8,7 +8,7 @@ This package provides BSV (Bitcoin SV) expert Claude agents for Claude Code. It 
 ## Features
 
 - **Easy Installation**: One-command setup via npx
-- **Expert BSV Agents**: Specialized agents for BSV TypeScript SDK and wallet toolbox
+- **Expert BSV Agents**: Three specialized agents for BSV development: TypeScript SDK, wallet toolbox, and identity services
 - **Automatic Updates**: Re-run the command to update agents
 - **Symlink Management**: Clean installation and removal of agent files
 
@@ -38,6 +38,11 @@ This package installs the following BSV expert agents:
 - **File**: `bsv-blockchain-wallet-toolbox-expert.md`
 - **Expertise**: Wallet functionality, transaction creation, key management, address generation, UTXO handling
 - **Use Cases**: Implementing BSV wallet features, transaction signing, UTXO management, BRC-100 compliance
+
+### BSV Blockchain Identity Services Expert
+- **File**: `bsv-blockchain-identity-services-expert.md`
+- **Expertise**: BSV Overlay Services, identity certificate validation, Topic Manager implementation, BRC-64/65 standards
+- **Use Cases**: Building identity verification systems, certificate registries, privacy-enhanced identity solutions
 
 ## How It Works
 
